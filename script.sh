@@ -7,13 +7,27 @@ catch_input()
     echo "type index of number in fibonacci sequence followed by [ENTER]: "
 
     read input
-    if [ $input -eq $input 2>/dev/null ]
+    if test $input = "hello"
     then
-        echo -e "\e[93m"
+        echo -e "Default \e[92mLight green"
 
-        fib_index $input $input
+        for (( i=0; i<100000; i++ )) 
+        do
+            echo -n "$i"
+        done
+        echo
+        echo
+        echo "hello is not a valid input..."
     else
-        echo "$input is not an integer"
+        if [ $input -eq $input 2>/dev/null ]
+        then
+            echo -e "\e[93m"
+
+            fib_index $input
+            echo "completed..."
+        else
+            echo "$input is not an integer"
+        fi
     fi
 }
 
@@ -35,19 +49,20 @@ fib_index()
     loops=0
     index=$1
    
-    echo $index
     echo "your input is $index"
    
-    for (( i=0; i<$index; i++ )) 
+    for (( i=1; i<$index+1; i++ )) 
     do
         loops=$((loops + 1))
         temp=$numberone
         numberone=$numbertwo
         numbertwo=$((temp + numberone))
-        echo -n "$numberone "
+        echo -n "$i) $numberone "
+        echo
     done
-
-    echo -n "$number2"
+    echo "The number at the index of [$index] is $numberone ..."
+    indexPlusOne=$((index+1))
+    echo "The number at the index of [$indexPlusOne] is $numbertwo ..."
 }
 
 
