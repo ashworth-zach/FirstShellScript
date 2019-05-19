@@ -98,6 +98,11 @@ read_file()
     fi
 }
 
+get_request()
+{
+    curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET https://www.cityoftulsa.org/apps/opendata/OpenData_VehicleTowList.jsn > test.txt
+}
+
 clear >$(tty)
 
 ls -lah 
@@ -111,6 +116,8 @@ print_date
 catch_input
 
 write_file
+
+get_request
 
 base64 -d <<<"H4sIAJM2MVYAA1NQgAEDIIhHBsgCBmgAU8TAQJsL2SgU41AFiDALYRhUF8I0NAEUCbBZUB7MBGRrUXX
 g8DC6CagORwkYtDCDcw3IMwDdOBL1IyRRwpBI7cihTlSYkRRNUHcRnUZgXIQGIlOoOQC/4ufk0gIAAA==" | gunzip
