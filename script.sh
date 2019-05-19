@@ -6,7 +6,7 @@ catch_input()
 {
     echo "type index of number in fibonacci sequence followed by [ENTER]: "
 
-    read input
+    read -s input
     if test $input = "hello"
     then
         echo -e "Default \e[92mLight green"
@@ -65,7 +65,7 @@ fib_index()
     echo "The number at the index of [$indexPlusOne] is $numbertwo ..."
 }
 
-
+clear >$(tty)
 hello_world
 
 print_date
