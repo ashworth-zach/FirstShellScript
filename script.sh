@@ -65,15 +65,66 @@ fib_index()
     echo "The number at the index of [$indexPlusOne] is $numbertwo ..."
 }
 
+write_file()
+{
+    text="CONCAT TEST"
+    finalstring="final string: "
+    for ((i=0;i<100;i++))
+    do
+        text="$text$i"
+        finalstring="$finalstring$text"
+    done
+    echo $finalstring >> test.txt
+    FILES=./test.txt
+    for f in $FILES
+    do
+    echo "Processing $f file..."
+    # count number of lines and output that for file $f
+    wc -l $f
+    done
+}
+
+read_file()
+{
+    echo
+    echo "would you like to see the contents of the test.txt file? [Y or N]"
+    read seeCat
+    if test $seeCat = "Y"
+    then
+        cat test.txt
+    else
+        echo
+        echo "suit yourself..."
+    fi
+}
+
 clear >$(tty)
+
+ls -lah 
+
+echo "cat: " | cat - test.txt > test2.txt
+
 hello_world
 
 print_date
 
 catch_input
 
-read -s exitvar
+write_file
 
-exit 0
+base64 -d <<<"H4sIAJM2MVYAA1NQgAEDIIhHBsgCBmgAU8TAQJsL2SgU41AFiDALYRhUF8I0NAEUCbBZUB7MBGRrUXX
+g8DC6CagORwkYtDCDcw3IMwDdOBL1IyRRwpBI7cihTlSYkRRNUHcRnUZgXIQGIlOoOQC/4ufk0gIAAA==" | gunzip
 
-$SHELL
+read_file
+exit_script()
+{
+    echo
+
+    echo "press enter to exit ..."
+    read -s exitvar
+
+    exit 0
+}
+
+exit_script
+
