@@ -72,4 +72,8 @@ print_date
 
 catch_input
 
+read -s exitvar
+
+exit 0
+
 $SHELL
